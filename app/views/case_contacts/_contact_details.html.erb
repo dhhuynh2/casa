@@ -1,0 +1,78 @@
+<div>
+    <h2>3. Select Contact Details</h2>
+    <div class="contact-type">
+        <h3><%= form.label :contact_made, "a. Contact Made" %></h3>
+        <%= form.radio_button(:contact_made, true, checked: case_contact.contact_made, required: true) %>
+        <%= form.label "Yes", for: "case_contact_contact_made_true" %>
+        <br>
+        <%= form.radio_button(:contact_made, false, checked: set_contact_made_false(case_contact), required: true) %>
+        <%= form.label "No", for: "case_contact_contact_made_false" %>
+    </div>
+    <div class="contact-medium">
+        <h3><%= form.label :medium_type, "b. Contact Medium" %></h3>
+        <%= form.select :medium_type,
+                        options_from_collection_for_select(contact_mediums, 'value', 'label', case_contact.medium_type),
+                        {prompt: t(".prompt_select_one")},
+                        class: "custom-select col-sm-12 col-md-4",
+                        required: true %>
+    </div>
+    <div class="occured-at">
+        <h3><%= form.label :occurred_at, "c. Occured On" %></h3>
+        <% occurred_at = @case_contact.occurred_at || Time.zone.now %>
+        <%= form.text_field :occurred_at,
+                            value: occurred_at.to_date,
+                            data: {provide: "datepicker", date_format: "yyyy/mm/dd"},
+                            class: "form-control" %>
+                            </div>
+    </div>
+    <div class="duration-minutes">
+        <h3><%= form.label "Duration", "d. Duration of Meeting" %></h3>
+        <div class="row slider-row">
+            <fieldset class="col-sm-12 col-md-6">
+            <legend>Hours</legend>
+            <div class="row slide-container">
+                <div>0</div>
+                <div class="slider col">
+                <%= form.range_field :duration_hours,
+                                        class: "custom-range slide",
+                                        id: "case-contact-duration-hours",
+                                        min: 0,
+                                        max: 23,
+                                        value: duration_hours(case_contact) %>
+                </div>
+                <div>23</div>
+            </div>
+            <div class="row range-value">
+                <%= form.text_field :duration_hours,
+                                    id: "casa-contact-duration-hours-display",
+                                    value: duration_hours(case_contact),
+                                    required: true %> &nbsp; <span> hour(s)</span>
+            </div>
+            </fieldset>
+        </div>
+        <div class="row slider-row">
+            <fieldset class="col-sm-12 col-md-6">
+            <legend>Minutes</legend>
+            <div class="row slide-container">
+                <div>0</div>
+                <div class="slider col">
+                <%= form.range_field :duration_minutes,
+                                    class: "custom-range slide",
+                                    id: "case-contact-duration-minutes",
+                                    min: 0,
+                                    max: 59,
+                                    step: 15,
+                                    value: duration_minutes(case_contact) %>
+                </div>
+                <div>59</div>
+            </div>
+            <div class="row range-value">
+                <%= form.text_field :duration_minutes,
+                                    class: "",
+                                    id: "casa-contact-duration-minutes-display",
+                                    value: duration_minutes(case_contact),
+                                    required: true %> &nbsp; <span> minute(s)</span>
+            </div>
+            </fieldset>
+        </div>        
+    </div>

@@ -166,9 +166,8 @@ en:
     edit:
       title: Editing Case Contact
     form:
-      plural_label: Select all relevant CASA cases
+      case_label: 1. Select all relevant CASA cases
       prompt_select_one: Please Select One
-      singular_label: CASA case
     new:
       title: New Case Contact
     quarter_not_editable: Archived contacts can't be edited. Case contacts are archived after the end of each quarter.
