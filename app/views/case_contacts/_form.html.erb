@@ -3,7 +3,7 @@
 
   <div class="field casa-case form-group card card-container">
     <div class="card-body">
-      <h2><label for="case_contact_casa_case"><%= t(".case_label") %></label></h2>
+      <h2><label for="case_contact_casa_case"><%= t(".case_label") %> <span style="color:red">*</span></label></h2>
       <% casa_cases.each_with_index do |casa_case, index| %>
         <div class="form-check">
           <%= check_box_tag "case_contact[casa_case_id][]",
@@ -43,14 +43,14 @@
 
 <div class="field form-group card card-container">
   <div class="card-body">
-    <h2>4. Enter Travel Details</h2>
-    <div class="miles-driven">
-      <h2><%= form.label :miles_driven, "a. Miles Driven" %></h2>
+    <h2><b>4. Enter Travel Details</b></h2>
+    <div class="miles-driven py-2">
+      <h2><%= form.label :miles_driven, "a. Miles Driven", class:"not-bold"%></h2>
       <%= form.number_field :miles_driven, class: "form-control", required: true, min: "0", max: 10000 %>
     </div>
     <% if current_organization.show_driving_reimbursement %>
-      <div class="want-driving-reimbursement">
-        <h2><%= form.label :want_driving_reimbursement, "b. Want Driving Reimbursement" %></h2>
+      <div class="want-driving-reimbursement py-2">
+        <h2><%= form.label :want_driving_reimbursement, "b. Want Driving Reimbursement", class:"not-bold" %></h2>
         <%= form.select :want_driving_reimbursement,
                         options_for_select([['Yes', true], ['No', false]], case_contact.want_driving_reimbursement),
                         {},
@@ -62,7 +62,7 @@
 
   <div class="field notes form-group card card-container">
     <div class="card-body"> 
-      <h2><%= form.label :notes, "5. Notes" %></h2>
+      <h2><%= form.label :notes, "5. Enter Notes" %></h2>
       <i><%= t("forms.case_contact.notes_notice") %></i>
       <%= form.text_area :notes, :rows => 5, placeholder: t("forms.case_contact.notes_placeholder"), class: "form-control" %>
     </div>
